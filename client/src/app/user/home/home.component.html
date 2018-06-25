@@ -1,0 +1,33 @@
+<div class="d-flex flex-column h-100">
+  <div class="px-3 py-3 d-flex justify-content-between align-items-center">
+    <div>
+      <a class="d-inline-block py-1 px-3 text-color-primary cabin no-selection rounded-base add-button" (click)="showCreateList = true">
+        Create new list
+      </a>
+    </div>
+    <div class="d-flex justify-content-between align-items-center cursor-pointer text-color-light no-selection option-list-container" (click)="toggleTypeList()">
+      <div class="mr-2">
+        <div class="text-size-sm selected">{{ listTypeSelected }}</div>
+        <div class="shadow-sm rounded option-list" *ngIf="showTypeList">
+          <div class="option-list-item" *ngFor="let listType of listTypes" (click)="onListTypeSelect(listType)" [hidden]="listType === listTypeSelected">
+            {{ listType }}
+          </div>
+        </div>
+      </div>
+      <i class="icon ion-ios-arrow-down" style="margin-top: 2px;"></i>
+    </div>
+  </div>
+  <!-- Lists -->
+  <div class="d-flex px-3 list-container" [@listAnim]="lists.length" style="flex: 1;">
+    <div class="mr-3" *ngIf="showCreateList" [@createListAnim]>
+      <app-create-list (create)="onCreateList($event)" (cancel)="onCancelCreateList()"></app-create-list>
+    </div>
+    <app-list *ngFor="let list of lists | filterByType: listTypeSelected | sortByCreationDate: 'desc'" [list]="list"></app-list>
+    <div class="pr-3" *ngIf="moreLists">
+      <a class="d-flex align-items-center text-color-primary cursor-pointer" (click)="loadMoreLists()">
+        <i class="icon ion-md-arrow-dropright-circle text-size-2xl mr-2"></i>
+        <span class="cabin font-weight-medium">More Lists</span>
+      </a>
+    </div>
+  </div>
+</div>

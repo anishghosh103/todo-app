@@ -1,0 +1,15 @@
+<div class="pt-3 px-2" style="overflow-x: hidden; overflow-y: auto;">
+  <div class="text-color-light text-center mb-3">
+    Search results for '{{ term }}' • {{ users.length }} result{{ users.length !== 1 ? 's' : '' }} found.
+  </div>
+  <div class="row px-3 mb-3" *ngIf="!noUserFound">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2" *ngFor="let user of users">
+      <app-user-details [user]="user" (userClick)="onUserClicked($event)" (addFriend)="onAddFriend($event)"></app-user-details>
+    </div>
+  </div>
+  <div class="text-center" *ngIf="moreUsers">
+    <a class="text-color-primary cursor-pointer" (click)="loadMoreUsers()">
+      {{ usersLoading ? 'Loading...' : 'Load More Users' }}
+    </a>
+  </div>
+</div>

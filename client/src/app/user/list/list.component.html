@@ -1,0 +1,33 @@
+<div class="d-flex flex-column bg-white rounded-lg shadow mr-3 mb-2 pb-2 list" *ngIf="list" (click)="onListClick($event)" [ngClass]="{ 'selected': list.selected }">
+
+  <!-- Header -->
+  <div class="list-header">
+    <div class="d-flex justify-content-between align-items-start py-3 px-4">
+      <div class="title">
+        <div class="no-selection font-weight-medium source-sans-pro text-color-dark mb-1">
+          {{ list.name }}
+        </div>
+        <div class="no-selection text-size-sm text-color-light source-sans-pro">
+          {{ list.tasks.length }}
+          task{{ list.tasks.length > 1 || list.tasks.length === 0 ? 's' : '' }}
+        </div>
+      </div>
+      <div class="no-selection d-flex align-items-center options">
+        <i class="icon ion-ios-undo mr-3" (click)="onUndoClick()"></i>
+        <i class="icon ion-ios-add text-size-xl mr-3" (click)="onAddClick()"></i>
+        <i class="icon ion-md-close text-size-lg text-color-red" (click)="onDeleteClick()"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add new task -->
+  <div class="py-2 px-4 new-task" *ngIf="showNewTask">
+    <input #newTaskInput type="text" class="w-100 cabin text-size-lg text-color-dark" placeholder="add a task" [(ngModel)]="newTaskDescription" (keyup.enter)="onAddTask()" (keyup.escape)="showNewTask = false">
+  </div>
+
+  <!-- Tasks -->
+  <div #tasksContainer class="tasks-container">
+    <app-task *ngFor="let task of list.tasks | sortByCreationDate: 'desc'" [task]="task" (done)="onTaskDone($event)" (edit)="onTaskEdit($event)" (delete)="onTaskDelete($event)" (addSubtask)="onAddSubtask($event)"></app-task>
+  </div>
+
+</div>

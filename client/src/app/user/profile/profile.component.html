@@ -1,0 +1,78 @@
+<div class="d-flex flex-column h-100" *ngIf="user">
+
+  <!-- User Info -->
+  <div class="py-3 px-3 d-flex flex-column flex-sm-row justify-content-between align-items-center user-info">
+    <!-- User Details Section -->
+    <div class="mr-0 mr-sm-3 py-1 user-details">
+      <div class="text-size-lg text-color-dark font-weight-medium source-sans-pro cursor-pointer" (click)="showUserDetails = !showUserDetails">
+        <span class="mr-1">{{ user.name }}</span>
+        <i class="icon" style="transform: translateY(2px);" [ngClass]="{ 'ion-ios-arrow-down': !showUserDetails, 'ion-ios-arrow-up': showUserDetails }"></i>
+      </div>
+      <div class="bg-white text-center shadow p-2 mt-1 rounded extra" *ngIf="showUserDetails">
+        <div class="text-color-light source-sans-pro text-color-dark">
+          {{ user.email }}
+        </div>
+        <div class="text-color-light source-sans-pro text-color-dark">
+          {{ user.mobile }}
+        </div>
+      </div>
+    </div>
+    <!-- Friend Request Section -->
+    <div *ngIf="friendStatus">
+      <div class="text-color-primary cursor-pointer" *ngIf="friendStatus.status === 'not-friend'" (click)="onAddFriendClick()">
+        <i class="icon ion-ios-person-add text-size-lg mr-1"></i>
+        <span>Add Friend</span>
+      </div>
+      <div *ngIf="friendStatus.status === 'request-pending'">
+        <div class="d-flex justify-content-center" *ngIf="friendStatus.request[0] === user.userId">
+          <button class="py-1 px-3 text-size-sm font-weight-medium rounded text-color-primary mr-2 friend-request-btn" (click)="acceptFriendRequest()">Accept Request</button>
+          <button class="py-1 px-3 text-size-sm font-weight-medium rounded text-color-red friend-request-btn" (click)="rejectFriendRequest()">Reject Request</button>
+        </div>
+        <div class="text-color-light" *ngIf="friendStatus.request[1] === user.userId">
+          Friend Request Sent
+        </div>
+      </div>
+      <div class="text-color-red cursor-pointer" *ngIf="friendStatus.status === 'friend'" (click)="onUnfriendClick()">
+        Unfriend
+      </div>
+    </div>
+  </div>
+
+  <div class="px-3 pb-3 text-size-sm source-sans-pro text-uppercase font-weight-medium" style="letter-spacing: 0.075rem;">
+    <span class=" text-color-dark">
+      {{ showFriends ? 'Friends' : 'Lists' }}
+    </span>
+    <span class="d-inline-block mt-2 ml-3 cursor-pointer text-color-primary" (click)="showFriends = !showFriends">
+        {{ !showFriends ? 'Friends' : 'Lists' }}
+      </span>
+  </div>
+
+  <!-- User Lists -->
+  <div style="overflow-x: auto; flex: 1;" *ngIf="!showFriends">
+    <div class="h-100 d-flex px-3 user-lists" [@listAnim]="lists.length" *ngIf="lists.length > 0">
+      <app-list *ngFor="let list of lists | sortByCreationDate: 'desc'" [list]="list"></app-list>
+      <div class="pr-3" *ngIf="moreLists">
+        <a class="d-flex align-items-center text-color-primary cursor-pointer" (click)="loadMoreLists()">
+          <i class="icon ion-md-arrow-dropright-circle text-size-2xl mr-2"></i>
+          <span class="cabin font-weight-medium">More Lists</span>
+        </a>
+      </div>
+    </div>
+    <div class="mt-3 text-center text-color-light text-size-lg" *ngIf="lists.length === 0">
+      No lists yet.
+    </div>
+  </div>
+
+  <!-- User Friends -->
+  <div class="friend-list" *ngIf="showFriends">
+    <div class="row px-3" *ngIf="friends.length > 0">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-2" *ngFor="let friend of friends">
+        <app-user-details [user]="friend" (userClick)="onFriendClick($event)" (addFriend)="onAddFriend($event)"></app-user-details>
+      </div>
+    </div>
+    <div class="mt-3 text-center text-color-light text-size-lg" *ngIf="friends.length === 0">
+      No friends yet.
+    </div>
+  </div>
+
+</div>

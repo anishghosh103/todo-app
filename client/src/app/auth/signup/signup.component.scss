@@ -1,0 +1,46 @@
+@import "~styles.scss";
+
+main {
+  display: flex;
+  justify-content: center;
+
+  .form-container {
+    width: 400px;
+    background: white;
+
+    h1 {
+      @include text('xl', 'dark', 'medium');
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      @include text('lg', 'dark', 'medium');
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      @include text-color('dark');
+    }
+
+    form {
+      width: 100%;
+
+      .country-code {
+        @include cabin;
+        @include text-color('light');
+        width: 25%;
+        text-align: center;
+        background: hsl(0, 0%, 95%);
+        border: 2px solid transparent;
+      }
+
+      button {
+        @extend .bg-color-green-dark;
+      }
+
+      select {
+        max-width: 100%;
+      }
+    }
+  }
+}

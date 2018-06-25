@@ -1,0 +1,33 @@
+$small: 1rem;
+$small-border: 2px;
+$normal: 2rem;
+$normal-border: 3px;
+$large: 3rem;
+$large-border: 4px;
+
+.loading {
+  display: inline-block;
+  width: $normal;
+  height: $normal;
+  border: $normal-border solid hsl(0, 0%, 90%);
+  border-top-color: hsl(210, 50%, 50%);
+  border-radius: 50%;
+  animation: rotate 0.75s infinite ease-in-out;
+
+  &.sm {
+    width: $small !important;
+    height: $small !important;
+    border-width: $small-border !important;
+  }
+
+  &.lg {
+    width: $large !important;
+    height: $large !important;
+    border-width: $large-border !important;
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
+}

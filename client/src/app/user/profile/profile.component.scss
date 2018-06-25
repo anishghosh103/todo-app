@@ -1,0 +1,59 @@
+.user-info {
+  .friend-request-btn {
+    background: transparent;
+    border: 2px solid !important;
+    transition: all .1s ease-in-out;
+    cursor: pointer;
+    outline: none;
+
+    &:nth-child(1):hover {
+      background: hsl(210, 50%, 50%);
+      border-color: hsl(210, 50%, 50%) !important;
+      color: white !important;
+    }
+    &:nth-child(2):hover {
+      background: hsl(0, 45%, 50%);
+      border-color: hsl(0, 45%, 50%) !important;
+      color: white !important;
+    }
+
+    &:active {
+      transform: translateY(1px);
+    }
+  }
+
+  .user-details {
+    position: relative;
+
+    .extra {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 16rem;
+      max-height: 24rem;
+      overflow-x: hidden;
+      overflow-y: auto;
+      word-wrap: break-word;
+      white-space: normal;
+      z-index: 100;
+
+      .friend-list {
+        border-top: 1px solid hsl(0, 0%, 95%);
+      }
+    }
+  }
+}
+
+@media all and (min-width: 576px) {
+  .user-details {
+    .extra {
+      left: -2px !important;
+      transform: none !important;
+    }
+  }
+}
+
+.user-lists {
+  overflow-x: auto;
+}

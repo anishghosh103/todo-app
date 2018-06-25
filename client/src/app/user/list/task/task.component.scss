@@ -1,0 +1,97 @@
+.task-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  .icon {
+    font-size: 1.35rem !important;
+    line-height: 1.5rem;
+  }
+
+  .task-description {
+    transition: all .1s ease-in-out;
+    width: 85%;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow: hidden;
+    position: relative;
+
+    &.editing {
+      padding: 0;
+      color: hsla(0, 0%, 0%, 0) !important;
+    }
+
+    textarea {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: calc(100% + 6px);
+      height: calc(100%);
+      resize: none;
+      overflow: hidden;
+      padding: 0;
+      border: none;
+      background: transparent;
+    }
+  }
+
+  &:hover {
+    .check-circle {
+      border-color: hsl(0, 0%, 60%);
+    }
+  }
+
+  .options {
+    $options-bg-color: hsl(0, 0%, 98%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: none;
+    background: $options-bg-color;
+    opacity: 0.75;
+    transition: all .1s ease-in-out;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -30px;
+      width: 30px;
+      height: 100%;
+      background: rgba(255,255,255,0);
+      background: -moz-linear-gradient(left, rgba(255,255,255,0) 0%, $options-bg-color 100%);
+      background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, $options-bg-color 100%);
+      background: linear-gradient(to right, rgba(255,255,255,0) 0%, $options-bg-color 100%);
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    background: hsl(0, 0%, 98%);
+    .options { display: flex; }
+  }
+}
+
+.subtasks-container {
+  background: hsl(0, 0%, 95%);
+}
+
+.icon.edit {
+  color: hsl(120, 50%, 50%);
+}
+
+.icon.add {
+  color: hsl(210, 50%, 50%);
+}
+
+.icon.delete {
+  color: hsl(0, 50%, 50%);
+}
+
+.subtask .icon {
+  font-size: 1rem !important;
+}

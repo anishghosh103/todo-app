@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-between align-items-center px-5 bg-white shadow-sm h-100 header">
+  <a routerLink="/" class="py-3 font-weight-medium text-size-2xl text-color-primary cursor-pointer no-selection no-underline">
+    todo
+  </a>
+  <div class="d-sm-none" style="position: relative;" (click)="stopPropagation($event)">
+    <i class="icon ion-md-menu text-size-xl text-color-light cursor-pointer" (click)="showMenu = !showMenu"></i>
+    <span class="text-size-xs source-sans-pro font-weight-bold count" *ngIf="notificationCount">
+      {{ notificationCount }}
+    </span>
+  </div>
+  <div class="bg-white p-2 p-sm-0 m-1 m-sm-0 flex-column flex-sm-row align-items-center rounded-lg nav" [ngClass]="{ 'd-flex': showMenu, 'd-none d-sm-flex': !showMenu }" (click)="stopPropagation($event)">
+    <div class="search-container mr-0 mr-sm-5">
+      <input type="text" class="py-2 pl-6 pr-3 rounded-full cabin" placeholder="Search Friends..." [(ngModel)]="searchTerm" (keyup.enter)="onSearch()">
+      <i class="icon ion-ios-search text-size-lg pl-3" (click)="onSearch()"></i>
+    </div>
+    <div class="d-flex justify-content-around justify-content-sm-start align-items-center mt-2 m-sm-0 options">
+      <div class="notification mr-sm-5">
+        <i class="icon ion-ios-notifications text-size-2xl text-color-primary" title="Notifications" (click)="onNotificationClick($event)"></i>
+        <span class="text-size-xs source-sans-pro font-weight-bold count" *ngIf="notificationCount">
+          {{ notificationCount }}
+        </span>
+        <div class="text-color-dark source-sans-pro py-2 rounded shadow-sm content" *ngIf="showNotifications && notifications.length > 0">
+          <div class="d-flex px-3 py-2 justify-content-end">
+            <span class="text-color-red cursor-pointer" (click)="deleteAllNotifications($event)">Delete all notifications.</span>
+          </div>
+          <div class="d-flex align-items-center" *ngFor="let notification of notifications | sortByCreationDate: 'desc'">
+            <div class="py-2 px-3 item" (click)="onNotificationItemClick($event, notification)">
+              <div *ngIf="notification.type === 'friend'">
+                <span class="font-weight-medium">{{ notification.data.userName }}</span>
+                {{ getNotificationOperation(notification) }}
+              </div>
+              <div *ngIf="notification.type === 'list'">
+                <span class="font-weight-medium">{{ notification.data.userName }}</span>
+                has {{ getNotificationOperation(notification) }}
+                <span class="font-weight-medium">{{ notification.data.listName }}</span>. 
+              </div>
+            </div>
+            <i class="icon ion-md-close mx-2 text-size-lg" (click)="deleteNotification($event, notification)"></i>
+          </div>
+          <div class="text-center">
+            <a class="text-color-primary cursor-pointer" (click)="loadMoreNotifications()" *ngIf="notificationCount > notifications.length">
+              {{ notificationsLoading ? 'Loading...' : 'Load More Notifications' }}
+            </a>
+          </div>
+        </div>
+      </div>
+      <i class="icon ion-md-contact text-size-2xl text-color-light mr-sm-5" title="Your Profile" (click)="onProfileClick()"></i>
+      <i class="icon ion-md-log-out text-size-xl text-color-red" title="Logout" (click)="onLogoutClick()"></i>
+    </div>
+  </div>
+</div>

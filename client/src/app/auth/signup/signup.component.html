@@ -1,0 +1,87 @@
+<app-header [page]='"signup"'></app-header>
+
+<main class="my-4">
+  <div class="p-4 shadow rounded-lg form-container">
+
+    <div *ngIf="!signedUp">
+
+      <h1 class="text-sm-left text-center">Create an account.</h1>
+
+      <form class="auth-form" (submit)="onSubmit($event)" autocomplete="off">
+
+        <div class="mb-2 d-flex flex-sm-row flex-column">
+
+          <div class="mr-sm-2">
+            <label class="mb-1" for="firstname">First Name</label>
+            <input type="text" id="firstname" [(ngModel)]="user.firstname" (input)="error.firstname = ''" name="firstname" placeholder="John" required>
+            <div class="error">{{ error.firstname }}</div>
+          </div>
+
+          <div>
+            <label class="mb-1" for="lastname">Last Name</label>
+            <input type="text" id="lastname" [(ngModel)]="user.lastname" (input)="error.lastname = ''" name="lastname" placeholder="Doe" required>
+            <div class="error">{{ error.lastname }}</div>
+          </div>
+
+        </div>
+
+        <div class="mb-2">
+          <label class="mb-1" for="email">Email</label>
+          <input type="text" id="email" [(ngModel)]="user.email" (input)="error.email = ''" name="email" placeholder="johndoe@email.com" required>
+          <div class="error">{{ error.email }}</div>
+        </div>
+
+        <div class="mb-2">
+          <label class="mb-1" for="password">Password</label>
+          <input type="password" id="password" [(ngModel)]="user.password" (input)="error.password = ''" name="password" placeholder="••••••••" required>
+          <div class="error">{{ error.password }}</div>
+        </div>
+
+        <div class="mb-2">
+          <label class="mb-1" for="country">Country</label>
+          <select name="country-code" id="country-code" (change)="onCountryChange($event.target.value)">
+            <option *ngFor="let country of countries" [ngValue]="code">
+              {{ country.name }}
+            </option>
+          </select>
+          <div class="error"></div>
+        </div>
+
+        <div class="mb-2">
+          <label class="mb-1" for="mobile">Mobile</label>
+          <div class="w-100 d-flex">
+            <span class="py-2 px-3 mr-1 rounded country-code">{{ user.countryCode }}</span>
+            <input type="text" id="mobile" class="rounded" [(ngModel)]="user.mobile" (input)="error.mobile = ''" name="mobile" placeholder="9281023912" required>
+          </div>
+          <div class="error">{{ error.mobile }}</div>
+        </div>
+
+        <div class="d-sm-flex justify-content-sm-end mt-2">
+          <div class="d-flex flex-column align-items-center source-sans-pro">
+            <div class="d-flex align-items-center">
+              <app-spinner [size]="'small'" class="mr-2" *ngIf="processing"></app-spinner>
+              <button type="submit" [ngClass]="{ 'disabled': processing }">
+                {{ processing ? 'Processing...' : 'Sign Up' }}
+              </button>
+            </div>
+            <div class="d-block d-sm-none mb-0">
+              or <a routerLink="/login">Login</a>
+            </div>
+          </div>
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <div *ngIf="signedUp">
+      <div class="mb-3">
+        <h2>Your account has been created.</h2>
+        <p>An activation link has been sent to your email. Please check your email.</p>
+      </div>
+      <a routerLink="/login">Go back to Login</a>
+    </div>
+    
+  </div>
+</main>

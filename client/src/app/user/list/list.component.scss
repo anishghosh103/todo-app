@@ -1,0 +1,53 @@
+.list {
+  width: 18rem;
+  max-height: 95%;
+  overflow: hidden;
+
+  .title {
+    width: 75%;
+    word-wrap: break-word;
+    overflow: hidden;
+    line-height: 1.2rem;
+  }
+
+  .options {
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .new-task {
+    input {
+      border: none;
+    }
+  }
+
+  .tasks-container {
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden
+  }
+
+  .icon {
+    line-height: 1rem;
+    color: hsl(210, 69%, 64%);
+  }
+
+  &.selected {
+    .list-header {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -5px;
+        width: 10px;
+        height: 10px;
+        background: hsl(131, 21%, 43%);
+        border-radius: 50%;
+        margin-top: -5px;
+      }
+    }
+  }
+}

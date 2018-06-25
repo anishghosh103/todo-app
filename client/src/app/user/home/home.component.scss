@@ -1,0 +1,47 @@
+.add-button {
+  $add-button-color: hsl(210, 50%, 50%); 
+  border: 2px solid $add-button-color;
+  cursor: pointer;
+  transition: all .1s ease-in-out;
+
+  &:hover {
+    background: $add-button-color;
+    color: white !important;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.option-list-container {
+  position: relative;
+
+  .option-list {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 75px;
+    overflow: hidden;
+
+    .option-list-item {
+      background: white;
+      padding: 4px 8px;
+      border-bottom: 1px solid hsl(0, 0%, 95%);
+
+      &:last-child {
+        border: none;
+      }
+
+      &:hover {
+        background: hsl(0, 0%, 96%);
+      }
+    }
+  }
+}
+
+.list-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}

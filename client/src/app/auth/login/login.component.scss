@@ -1,0 +1,15 @@
+@import "~styles.scss";
+
+main {
+  display: flex;
+  justify-content: center;
+
+  .form-container {
+    background: white;
+    @include text-color('dark');
+
+    h1 {
+      @include text('xl', 'dark', 'medium');
+    }
+  }
+}

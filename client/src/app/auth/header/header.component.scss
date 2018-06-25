@@ -1,0 +1,17 @@
+@import "~styles.scss";
+
+header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-top: 3px solid $primary-color;
+
+  nav {
+    @include cabin;
+    @include text('sm', 'light');
+
+    a {
+     @include text-size('sm');
+    }
+  }
+}

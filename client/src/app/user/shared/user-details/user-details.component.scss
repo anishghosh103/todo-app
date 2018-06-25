@@ -1,0 +1,21 @@
+.user-details {
+  transition: all .1s ease-in-out;
+  
+  .icon.add-friend {
+    transition: all .075s ease-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      transform: none !important;
+      cursor: not-allowed !important;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 2px 8px 0 hsla(210, 30%, 50%, 0.25) !important;
+  }
+}

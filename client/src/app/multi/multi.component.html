@@ -1,0 +1,38 @@
+<header class="text-center py-3 px-5 border-t-3 border-color-primary">
+  <a class="logo" routerLink="/">todo</a>
+</header>
+<div class="d-flex justify-content-center mt-5">
+
+  <div class="py-3 px-4 text-color-dark" *ngIf="type === 'activate'">
+    <div class="text-size-lg font-weight-medium" *ngIf="!done && !error">
+      Activating...
+    </div>
+  </div>
+
+  <div class="py-3 px-4 bg-white text-color-dark rounded-lg source-sans-pro shadow" *ngIf="type === 'reset'">
+    <div class="text-size-xl font-weight-medium mb-4">
+      Reset Password.
+    </div>
+    <div class="mb-3">
+      <label class="mb-1 ml-1" for="password">Password</label>
+      <input type="password" id="password" class="w-100 cabin py-2 px-3" [(ngModel)]="password" (input)="error.password = ''" (keyup.enter)="resetPassword()">
+      <div class="text-color-red text-right error">{{ error.password }}</div>
+    </div>
+    <div class="d-flex justify-content-end mb-1">
+      <button class="rounded-full text-white bg-color-red border-0 py-2 px-5 cursor-pointer cabin" (click)="resetPassword()">
+        Reset
+      </button>
+    </div>
+  </div>
+
+  <div class="py-3 px-4 source-sans-pro text-color-dark text-center" *ngIf="type === 'not-found'">
+    <div class="text-size-3xl text-color-red font-weight-light mb-2">
+      Oops!
+    </div>
+    <div class="text-size-2xl font-weight-bold mb-3">
+      Page not found.
+    </div>
+    <a class="text-color-primary text-size-lg" routerLink="/">Go to Homepage</a>
+  </div>
+
+</div>

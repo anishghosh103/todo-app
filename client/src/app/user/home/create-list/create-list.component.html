@@ -1,0 +1,40 @@
+<div class="bg-white rounded-lg shadow mb-2 p-3 create-list">
+  <div class="d-flex flex-column mb-4">
+    <div class="d-flex justify-content-between align-items-center source-sans-pro mb-1">
+      <label class="text-size-sm text-color-dark font-weight-medium ml-1 mb-0" for="name">
+        List Name
+      </label>
+      <div class="cursor-pointer list-type-option" (click)="showListTypeOptions = !showListTypeOptions">
+        <div class="d-flex align-items-center text-size-sm text-color-light">
+          <span class="no-selection" style="margin-right:5px;">{{ listType }}</span>
+          <i class="icon ion-ios-arrow-down no-selection" style="margin-top:2px;"></i>
+        </div>
+        <div class="text-size-sm source-sans-pro bg-white border rounded shadow-sm list" *ngIf="showListTypeOptions">
+          <div class="py-2 px-3 item" (click)="listType = 'Private'">
+            <div class="font-weight-medium">
+              Private
+            </div>
+            <div>
+              Only you will be able to see and modify a Private list.
+            </div>
+          </div>
+          <div class="py-2 px-3 item" (click)="listType = 'Public'">
+            <div class="font-weight-medium">
+              Public
+            </div>
+            <div>
+              Anyone can see a Public list but only you and your friends will be able to modify it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input #listNameInput type="text" autocomplete="off" id="name" class="py-2 px-3 rounded cabin" placeholder="e.g. Weekend Tasks" [(ngModel)]="name" (keyup.enter)="onCreateClick()">
+  </div>
+  <div class="d-flex justify-content-end">
+    <button class="border-0 text-color-light text-size-sm py-2 px-3 rounded mr-2 cancel-btn" (click)="onCancelClick()">Cancel</button>
+    <button class="rounded border-0 cabin cursor-pointer text-size-sm bg-color-green-dark text-white font-weight-medium py-2 px-3 create-btn" (click)="onCreateClick()">
+      Create
+    </button>
+  </div>
+</div>

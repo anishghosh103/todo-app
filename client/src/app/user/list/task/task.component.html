@@ -1,0 +1,25 @@
+<div *ngIf="task">
+  <div class="d-flex justify-content-between align-items-center py-2 px-4 task-container">
+    <div class="d-flex align-items-start w-100">
+      <i class="icon mr-3 text-color-light cursor-pointer" [ngClass]="{ 'ion-md-radio-button-off': !task.done, 'ion-md-checkmark-circle': task.done }" (click)="onDoneClick()"></i>
+      <div class="no-selection text-color-dark cabin task-description" [ngClass]="{ 'text-color-light': task.done, 'text-size-sm': type === 'subtask', 'editing': showEditInput }">
+        {{ showEditInput ? updatedDescription : task.description }}
+        <textarea #textareaInput class="cabin" [(ngModel)]="updatedDescription" *ngIf="showEditInput" (keyup.escape)="showEditInput = false" (keydown.enter)="updateDescription($event)" (blur)="showEditInput = false"></textarea>
+      </div>
+    </div>
+    <div class="px-3 align-items-center no-selection options" [ngClass]="{ 'subtask': type === 'subtask' }" *ngIf="!showEditInput">
+      <i class="icon ion-md-create cursor-pointer no-selection mr-3 edit" title="edit" (click)="onEditClick()" *ngIf="!task.done"></i>
+      <i class="icon ion-md-add cursor-pointer no-selection mr-3 add" title="add" (click)="onAddClick()" *ngIf="!task.done && type === 'task'"></i>
+      <i class="icon ion-md-trash cursor-pointer mr-2 no-selection delete" title="delete" (click)="onDeleteClick()"></i>
+      <i class="icon ion-ios-arrow-down ml-2 cursor-pointer no-selection text-color-light" title="show subtasks" (click)="showSubtasks = true" *ngIf="!showSubtasks && type === 'task'"></i>
+      <i class="icon ion-ios-arrow-up ml-2 cursor-pointer no-selection text-color-light" title="show subtasks" (click)="showSubtasks = false" *ngIf="showSubtasks && type === 'task'"></i>
+    </div>
+  </div>
+  <div class="subtasks-container" *ngIf="showSubtasks">
+    <input #subtaskInput type="text" class="w-100 py-2 px-4 cabin border-0" style="background: transparent;" placeholder="add a subtask" [(ngModel)]="newSubtask" (keyup.enter)="onAddSubtask()" (keyup.escape)="showSubtaskInput = false" *ngIf="showSubtaskInput">
+    <div class="text-color-light text-size-sm py-2 text-center" *ngIf="task.subtasks.length === 0">
+      no subtasks yet.
+    </div>
+    <app-task *ngFor="let subtask of task.subtasks | sortByCreationDate: 'desc'" [task]="subtask" [type]="'subtask'" (done)="onDoneClick($event)" (delete)="onDeleteClick($event)" (edit)="onSubtaskEdit($event)"></app-task>
+  </div>
+</div>

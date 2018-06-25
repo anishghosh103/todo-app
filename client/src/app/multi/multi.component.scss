@@ -1,0 +1,30 @@
+input {
+  border: 2px solid hsl(0, 0%, 95%);
+  background: hsl(0, 0%, 95%);
+  transition: all .1s ease-in-out;
+
+  &:focus {
+    background: transparent;
+  }
+}
+
+button {
+  transition: all .1s ease-in-out;
+  letter-spacing: 0.04rem;
+  outline: none;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px 0 hsla(0, 0%, 0%, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: none;
+  }
+}
+
+.error {
+  height: 1.2rem;
+  line-height: 1.2rem;
+}

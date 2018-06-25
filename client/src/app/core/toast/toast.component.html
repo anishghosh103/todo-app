@@ -1,0 +1,6 @@
+<div class="d-flex align-items-start text-white text-size-xl source-sans-pro font-weight-light rounded-base py-2 px-3 toast m-5" role="alert" [ngClass]="{ 'bg-color-red': type === 'error', 'bg-color-primary': type === 'info' }" [@toastAnim]="state" *ngIf="valid">
+  <div class="mr-3">
+    {{ message }}
+  </div>
+  <span class="icon text-size-xl" (click)="close()">&times;</span>
+</div>

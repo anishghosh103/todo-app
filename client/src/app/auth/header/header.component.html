@@ -1,0 +1,11 @@
+<header class="justify-content-center justify-content-sm-between">
+  <a class="logo" routerLink="/login">todo</a>
+  <nav class="d-none d-sm-block">
+    <p *ngIf="page === 'login'">
+      If you don't have an account, <a routerLink="/signup">Sign Up</a>.
+    </p>
+    <p *ngIf="page === 'signup'">
+      If you already have an account, <a routerLink="/login">Login</a>.
+    </p>
+  </nav>
+</header>
