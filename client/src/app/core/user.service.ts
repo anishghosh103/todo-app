@@ -70,9 +70,10 @@ export class UserService {
   }
 
   signup(user) {
-    user.mobile = user.countryCode + '-' + user.mobile;
+    const newUser = {...user};
+    newUser.mobile = newUser.countryCode + '-' + newUser.mobile;
     return this.promise(cb => {
-      this.http.post('/signup', user).subscribe(
+      this.http.post('/signup', newUser).subscribe(
         (response: any) => {
           if (response.status === 200) {
             cb.success(response.data);
